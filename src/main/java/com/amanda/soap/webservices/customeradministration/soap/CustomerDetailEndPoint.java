@@ -14,13 +14,14 @@ public class CustomerDetailEndPoint {
 	
 	@PayloadRoot(namespace="http://amandareis.com.br", localPart="GetCustomerDetailRequest")
 	@ResponsePayload
-	public GetCustomerDetailResponse processCustomerDetailrequest(@RequestPayload GetCustomerDetailRequest requisicao) {
+	public GetCustomerDetailResponse processCustomerDetailrequest(@RequestPayload GetCustomerDetailRequest req) {
 		GetCustomerDetailResponse response = new GetCustomerDetailResponse();
 		CustomerDetail customerDetail= new CustomerDetail();		
 		customerDetail.setId(1);
 		customerDetail.setName("Bob");
 		customerDetail.setPhone("999999999");
 		customerDetail.setEmail("bob@gmail.com");
+		response.setCustomerDetail(customerDetail);
 		return response;
 	}
 
