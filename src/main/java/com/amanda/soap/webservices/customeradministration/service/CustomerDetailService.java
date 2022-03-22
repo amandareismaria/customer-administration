@@ -27,5 +27,16 @@ public class CustomerDetailService {
 		customers.add(customer4);
 	}
 
+	public Customer findById(int id) {
+		Optional<Customer> customerOptional = customers.stream().filter(c -> c.getId() == id).findAny();
+		if (customerOptional.isPresent()) {
+			return customerOptional.get();
+		}
+		
+		return null;
+	}
 	
+	public List<Customer> findAll(){
+		return customers;
+	}
 }
