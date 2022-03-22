@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.amanda.soap.webservices.customeradministration.bean.Customer;
+import com.amanda.soap.webservices.customeradministration.helper.Status;
 
 @Component
 public class CustomerDetailService {
@@ -32,11 +33,22 @@ public class CustomerDetailService {
 		if (customerOptional.isPresent()) {
 			return customerOptional.get();
 		}
-		
+
 		return null;
 	}
-	
-	public List<Customer> findAll(){
+
+	public List<Customer> findAll() {
 		return customers;
+	}
+
+	public Status deleteById(Integer id) {
+		Optional<Customer> customerOptional = customers.stream().filter(c -> c.getId() == id).findAny();
+		if (customerOptional.isPresent()) {
+			customers.remove(customerOptional.get());
+			return Status.SUCCESS;
+
+		}
+
+		return Status.FAILURE;
 	}
 }
