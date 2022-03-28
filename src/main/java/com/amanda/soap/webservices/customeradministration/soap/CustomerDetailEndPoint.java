@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.amanda.soap.webservices.customeradministration.bean.Customer;
 import com.amanda.soap.webservices.customeradministration.service.CustomerDetailService;
+import com.amanda.soap.webservices.customeradministration.soap.exception.CustomerNotFoundException;
 
 import br.com.amandareis.CustomerDetail;
 import br.com.amandareis.DeleteCustomerRequest;
@@ -30,7 +31,7 @@ public class CustomerDetailEndPoint {
 			throws Exception {
 		Customer customer = service.findById(req.getId());
 		if (customer == null) {
-			throw new Exception("Invalid Customer id " + req.getId());
+			throw new CustomerNotFoundException("Invalid Customer id " + req.getId());
 		}
 		return convertToGetCustomerDetailResponse(customer);
 	}
